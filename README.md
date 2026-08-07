@@ -1,4 +1,4 @@
-MerchantOS Mock Service
+## MerchantOS Mock Service
 
 A lightweight mock API service for MerchantOS, powered by WireMock and Docker.
 

@@ -1,0 +1,20 @@
+{
+  "name": "merchantos-mock-service",
+  "private": true,
+  "packageManager": "bun@latest",
+  "scripts": {
+    "dev": "docker compose up",
+    "start": "docker compose up --build",
+    "stop": "docker compose down",
+    "restart": "docker compose down && docker compose up --build",
+    "logs": "docker compose logs -f",
+    "clean": "docker compose down -v",
+    "generate": "bun scripts/generate-mocks.ts",
+    "validate": "bun scripts/validate.ts",
+    "watch": "bun --watch scripts/watch.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2"
+  }
+}

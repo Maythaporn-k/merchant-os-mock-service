@@ -13,6 +13,7 @@ Tech Stack
 
 Project Structure
 
+```sh
 merchant-os-mock-service/
 ├── mappings/
 │ └── user.json
@@ -22,6 +23,7 @@ merchant-os-mock-service/
 ├── bun.lock
 ├── .gitignore
 └── README.md
+```
 
 mappings/
 
@@ -29,36 +31,38 @@ Contains WireMock API mappings.
 
 Example:
 
+```bash
 {
-"request": {
-"method": "GET",
-"url": "/users"
-},
-"response": {
-"status": 200,
-"headers": {
-"Content-Type": "application/json"
-},
-"jsonBody": {
-"id": 1,
-"name": "May",
-"email": "may@example.com"
+  "request": {
+    "method": "GET",
+    "url": "/users"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 1,
+      "name": "May",
+      "email": "may@example.com"
+    }
+  }
 }
-}
-}
+```
 
 This creates:
 
 GET /users
 
 and returns:
-
+```bash
 {
 "id": 1,
 "name": "May",
 "email": "may@example.com"
 }
-
+```
 Getting Started
 
 Prerequisites
@@ -69,56 +73,56 @@ Make sure you have:
 - Bun
 
 Check your installation:
-
+```bash
 docker --version
 bun --version
-
+```
 Install
 
 Clone the project and install dependencies:
-
+```bash
 bun install
-
+```
 Start Mock Service
 
 Start WireMock with Docker:
-
+```bash
 bun run start
-
+```
 This runs:
-
+```bash
 docker compose up --build
-
+```
 Once the container is running, WireMock should be available at:
-
+```sh
 http://localhost:8080
-
+```
 Test the API
 
 You can test the example /users endpoint with:
-
+```sh
 curl http://localhost:8080/users
-
+```
 Expected response:
-
+```bash
 {
 "id": 1,
 "name": "May",
 "email": "may@example.com"
 }
-
+```
 WireMock Admin API
 
 WireMock provides an Admin API that can be useful for debugging and managing mocks.
 
 Check the WireMock status:
-
+```sh
 curl http://localhost:8080/\_\_admin
-
+```
 View all mappings:
-
+```sh
 curl http://localhost:8080/\_\_admin/mappings
-
+```
 Adding a New Mock API
 
 Create a new JSON file inside:
@@ -131,76 +135,53 @@ mappings/products.json
 
 Example:
 
+```bash
 {
-"request": {
-"method": "GET",
-"url": "/products"
-},
-"response": {
-"status": 200,
-"headers": {
-"Content-Type": "application/json"
-},
-"jsonBody": {
-"items": [
-{
-"id": 1,
-"name": "Coffee"
-},
-{
-"id": 2,
-"name": "Cake"
+  "request": {
+    "method": "GET",
+    "url": "/products"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "items": [
+        {
+          "id": 1,
+          "name": "Coffee"
+        },
+        {
+          "id": 2,
+          "name": "Cake"
+        }
+      ]
+    }
+  }
 }
-]
-}
-}
-}
+```
 
 Restart the service if required:
-
+```bash
 bun run start
-
+```
 Then test:
-
+```bash
 curl http://localhost:8080/products
-
+```
 Stop the Service
 
 Press:
-
+```sh
 Ctrl + C
-
-Or stop the Docker Compose services:
-
-docker compose down
-
-Troubleshooting
-
-Port 8080 is already in use
-
-Check which process is using port 8080:
-
-lsof -i :8080
-
-Kill the process:
-
-kill -9 <PID>
-
-Then start the mock service again:
-
-bun run start
-
-Rebuild Docker
-
-If you changed the Docker configuration or mappings and want a clean rebuild:
-
-docker compose down
-docker compose up --build
+```
 
 Development Workflow
 
 The typical workflow is:
 
+```sh
 Create / update mapping
 ↓
 mappings/\*.json
@@ -210,3 +191,4 @@ Docker / WireMock
 localhost:8080
 ↓
 MerchantOS application
+```
